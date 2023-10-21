@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Storage", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Storage.UnitTests", "EntityFramework.Storage.UnitTests\EntityFramework.Storage.UnitTests.csproj", "{EDC1546E-E3E1-464D-A346-8C7072E30343}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{D5BFED1E-2825-4A9E-A465-8C1F2B02D5B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EDC1546E-E3E1-464D-A346-8C7072E30343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC1546E-E3E1-464D-A346-8C7072E30343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC1546E-E3E1-464D-A346-8C7072E30343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5BFED1E-2825-4A9E-A465-8C1F2B02D5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BFED1E-2825-4A9E-A465-8C1F2B02D5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BFED1E-2825-4A9E-A465-8C1F2B02D5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BFED1E-2825-4A9E-A465-8C1F2B02D5B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

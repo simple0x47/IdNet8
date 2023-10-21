@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         
-        <PackageId>IdNet8.Storage</PackageId>
-        <Description>Storage interfaces and models for IdNet8</Description>
+        <PackageId>IdNet8.Core</PackageId>
+        <Description>OpenID Connect and OAuth 2.0 Framework for .NET 8</Description>
         <Authors>Brock Allen;Dominick Baier</Authors>
+        
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
 
         <PackageProjectUrl>https://github.com/simple0x47/IdNet8</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -24,14 +27,21 @@
 
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
     </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Storage\Storage.csproj" />
+    </ItemGroup>
     
     <ItemGroup>
         <PackageReference Include="IdentityModel" Version="6.2.0"></PackageReference>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1"></PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"></PackageReference>
+        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.0.3"></PackageReference>
+        
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0-rc.2.23480.2"></PackageReference>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1"></PackageReference>
     </ItemGroup>
 </Project>
