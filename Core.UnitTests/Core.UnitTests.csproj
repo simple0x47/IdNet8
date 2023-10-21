@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>IdNet8.Core.UnitTests</AssemblyName>
+        <RootNamespace>IdNet8.Core.UnitTests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2"></PackageReference>
+        
+        <PackageReference Include="xunit" Version="2.5.3"></PackageReference>
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"></PackageReference>
+        <PackageReference Include="FluentAssertions" Version="6.12.0"></PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="identityserver_testing.cer">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="identityserver_testing.pfx">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

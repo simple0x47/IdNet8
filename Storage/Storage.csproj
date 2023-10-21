@@ -23,6 +23,10 @@
         <LangVersion>12</LangVersion>
 
         <Nullable>enable</Nullable>
+
+        <AssemblyName>IdNet8.Storage</AssemblyName>
+
+        <RootNamespace>IdNet8.Storage</RootNamespace>
     </PropertyGroup>
     
     <PropertyGroup>
