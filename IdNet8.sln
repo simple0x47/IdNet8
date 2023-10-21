@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTests", "Core.UnitTests\Core.UnitTests.csproj", "{FDA8E8F6-6E39-4889-BDFB-CD81C802D605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework", "EntityFramework\EntityFramework.csproj", "{591AA66C-5A40-4B86-BAFD-629F760BD1E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.IntegrationTests", "EntityFramework.IntegrationTests\EntityFramework.IntegrationTests.csproj", "{A741B932-7986-40AE-BA7E-DF04022611EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{FDA8E8F6-6E39-4889-BDFB-CD81C802D605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA8E8F6-6E39-4889-BDFB-CD81C802D605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDA8E8F6-6E39-4889-BDFB-CD81C802D605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591AA66C-5A40-4B86-BAFD-629F760BD1E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591AA66C-5A40-4B86-BAFD-629F760BD1E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591AA66C-5A40-4B86-BAFD-629F760BD1E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591AA66C-5A40-4B86-BAFD-629F760BD1E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A741B932-7986-40AE-BA7E-DF04022611EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A741B932-7986-40AE-BA7E-DF04022611EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A741B932-7986-40AE-BA7E-DF04022611EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A741B932-7986-40AE-BA7E-DF04022611EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

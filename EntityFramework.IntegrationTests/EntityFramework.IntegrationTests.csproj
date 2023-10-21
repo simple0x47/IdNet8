@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        
+        <AssemblyName>IdNet8.EntityFramework.IntegrationTests</AssemblyName>
+        <RootNamespace>IdNet8.EntityFramework.IntegrationTests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EntityFramework\EntityFramework.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2"></PackageReference>
+        <PackageReference Include="xunit" Version="2.5.3"></PackageReference>
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"></PackageReference>
+        <PackageReference Include="FluentAssertions" Version="6.12.0"></PackageReference>
+        
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-rc.2.23480.1"></PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0-rc.2.23480.1"></PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-rc.2.23480.1"></PackageReference>
+    </ItemGroup>
+</Project>

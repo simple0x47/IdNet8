@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        
+        <PackageId>IdNet8.EntityFramework</PackageId>
+        <Description>EntityFramework persistence layer for IdNet8</Description>
+        <Authors>Brock Allen;Dominick Baier;Scott Brady</Authors>
+        
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <PackageProjectUrl>https://github.com/simple0x47/IdNet8</PackageProjectUrl>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageReleaseNotes>https://github.com/simple0x47/IdNet8/releases</PackageReleaseNotes>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        
+        <AssemblyName>IdNet8.EntityFramework</AssemblyName>
+        
+        <RootNamespace>IdNet8.EntityFramework</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.csproj" />
+      <ProjectReference Include="..\EntityFramework.Storage\EntityFramework.Storage.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1"></PackageReference>
+    </ItemGroup>
+</Project>
