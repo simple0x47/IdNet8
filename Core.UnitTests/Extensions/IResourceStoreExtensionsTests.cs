@@ -15,7 +15,7 @@ namespace IdentityServer.UnitTests.Extensions
     public class IResourceStoreExtensionsTests
     {
         [Fact]
-        public void GetAllEnabledResourcesAsync_on_duplicate_identity_scopes_should_fail()
+        public async void GetAllEnabledResourcesAsync_on_duplicate_identity_scopes_should_fail()
         {
             var store = new MockResourceStore()
             {
@@ -25,7 +25,7 @@ namespace IdentityServer.UnitTests.Extensions
             };
 
             Func<Task> a = () => store.GetAllEnabledResourcesAsync();
-            a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*identity scopes");
+            await a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*identity scopes*");
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace IdentityServer.UnitTests.Extensions
         }
 
         [Fact]
-        public void GetAllEnabledResourcesAsync_on_duplicate_api_resources_should_fail()
+        public async void GetAllEnabledResourcesAsync_on_duplicate_api_resources_should_fail()
         {
             var store = new MockResourceStore()
             {
@@ -50,7 +50,7 @@ namespace IdentityServer.UnitTests.Extensions
             };
 
             Func<Task> a = () => store.GetAllEnabledResourcesAsync();
-            a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*api resources*");
+            await a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*api resources*");
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace IdentityServer.UnitTests.Extensions
         }
 
         [Fact]
-        public void FindResourcesByScopeAsync_on_duplicate_identity_scopes_should_fail()
+        public async void FindResourcesByScopeAsync_on_duplicate_identity_scopes_should_fail()
         {
             var store = new MockResourceStore()
             {
@@ -75,7 +75,7 @@ namespace IdentityServer.UnitTests.Extensions
             };
 
             Func<Task> a = () => store.FindResourcesByScopeAsync(new string[] { "A" });
-            a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*identity scopes*");
+            await a.Should().ThrowAsync<Exception>().WithMessage("*duplicate*identity scopes*");
         }
 
         [Fact]

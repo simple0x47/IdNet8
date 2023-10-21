@@ -107,12 +107,12 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
 
         [Fact]
-        public void ProcessConsentAsync_NullRequest_Throws()
+        public async void ProcessConsentAsync_NullRequest_Throws()
         {
             Func<Task> act = () => _subject.ProcessConsentAsync(null, new ConsentResponse());
 
 
-            act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("request");
+            await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("request");
         }
         
         [Fact]
@@ -131,7 +131,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
         }
 
         [Fact]
-        public void ProcessConsentAsync_PromptModeIsLogin_Throws()
+        public async void ProcessConsentAsync_PromptModeIsLogin_Throws()
         {
             RequiresConsent(true);
             var request = new ValidatedAuthorizeRequest()
@@ -146,11 +146,11 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
+            await act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
         }
 
         [Fact]
-        public void ProcessConsentAsync_PromptModeIsSelectAccount_Throws()
+        public async void ProcessConsentAsync_PromptModeIsSelectAccount_Throws()
         {
             RequiresConsent(true);
             var request = new ValidatedAuthorizeRequest()
@@ -165,7 +165,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
+            await act.Should().ThrowAsync<ArgumentException>().WithMessage("*PromptMode*");
         }
 
 
