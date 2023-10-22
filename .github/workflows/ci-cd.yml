@@ -39,6 +39,7 @@ jobs:
           PATCH_VERSION: ${{ github.run_number }}
       - name: Run tests
         run: |
+          printenv
           dotnet test IdNet8.sln
       - name: Build & package
         run: |
