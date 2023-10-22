@@ -4,6 +4,8 @@
         <TargetFramework>net8.0</TargetFramework>
         
         <PackageId>IdNet8.EntityFramework</PackageId>
+        <Version>5123.0.0</Version>
+        
         <Description>EntityFramework persistence layer for IdNet8</Description>
         <Authors>Brock Allen;Dominick Baier;Scott Brady</Authors>
         
