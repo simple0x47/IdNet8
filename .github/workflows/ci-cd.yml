@@ -27,6 +27,7 @@ jobs:
           tar zxf ${{ env.DOTNET_FILE }}
           rm -R ${{ env.DOTNET_FILE }}
           cd ../
+          sudo rm -R /usr/share/dotnet
           sudo mv -f ./dotnet /usr/share/
       - name: Replace placeholder version
         run: |
@@ -41,7 +42,6 @@ jobs:
           PATCH_VERSION: ${{ github.run_number }}
       - name: Run tests
         run: |
-          printenv
           dotnet test IdNet8.sln
       - name: Build & package
         run: |
