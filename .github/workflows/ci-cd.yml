@@ -5,7 +5,8 @@ on:
   pull_request:
 
 env:
-  DOTNET_VERSION: "8.0.100-rc.2.23502.2"
+  DOTNET_DOWNLOAD_URL: "https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.100-rc.2.23502.2/dotnet-sdk-8.0.100-rc.2.23502.2-linux-x64.tar.gz"
+  DOTNET_FILE: "dotnet-sdk.tar.gz"
   ARTIFACT_NAME: "le_baguette"
 
 jobs:
@@ -17,11 +18,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Download dotnet-install
+      - name: Download & install .NET SDK
         run: |
-          curl -LO https://dot.net/v1/dotnet-install.sh
-          chmod +x dotnet-install.sh
-          ./dotnet-install.sh -v ${{ env.DOTNET_VERSION }}
+          curl -LO ${{ env.DOTNET_DOWNLOAD_URL }} ${{ env.DOTNET_FILE }}
+          export DOTNET_ROOT=$(pwd)/.dotnet
+
+          mkdir -p "$DOTNET_ROOT" && tar zxf "$DOTNET_FILE" -C "$DOTNET_ROOT"
+
+          export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
       - name: Replace placeholder version
         run: |
           sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Core/Core.csproj
@@ -82,7 +86,7 @@ jobs:
           cd nuget
           dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ vars.NUGET_SOURCE }}
   clean:
-    if: always()
+    if: success() || failure()
     
     runs-on: ubuntu-latest
     timeout-minutes: 10
