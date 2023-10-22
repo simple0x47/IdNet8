@@ -1,0 +1,94 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+
+env:
+  DOTNET_VERSION: "8.0.100-rc.2.23502.2"
+  ARTIFACT_NAME: "le_baguette"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Download dotnet-install
+        run: |
+          curl -LO https://dot.net/v1/dotnet-install.sh
+          chmod +x dotnet-install.sh
+          ./dotnet-install.sh -v ${{ env.DOTNET_VERSION }}
+      - name: Replace placeholder version
+        run: |
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Core/Core.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Core.UnitTests/Core.UnitTests.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./EntityFramework/EntityFramework.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./EntityFramework.IntegrationTests/EntityFramework.IntegrationTests.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./EntityFramework.Storage/EntityFramework.Storage.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./EntityFramework.Storage.UnitTests/EntityFramework.Storage.UnitTests.csproj
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Storage/Storage.csproj
+        env:
+          PATCH_VERSION: ${{ github.run_number }}
+      - name: Run tests
+        run: |
+          dotnet test IdNet8.sln
+      - name: Build & package
+        run: |
+          dotnet pack IdNet8.sln
+          mkdir nuget
+          mv ./Core/bin/Release/*.nupkg ./nuget/
+          mv ./EntityFramework/bin/Release/*.nupkg ./nuget/
+          mv ./EntityFramework.Storage/bin/Release/*.nupkg ./nuget/
+          mv ./Storage/bin/Release/*.nupkg ./nuget/
+          zip nuget.zip ./nuget
+      - name: Upload nuget packages as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./nuget.zip
+  cd:
+    needs: ci
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./
+      - name: Unzip NuGet packages
+        run: |
+          unzip nuget.zip
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          PATCH_VERSION: ${{ github.run_number }}
+        with:
+          tag_name: v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}
+          release_name: v${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}
+          draft: false
+          prerelease: false
+      - name: Publish NuGet packages
+        run: |
+          cd nuget
+          dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ vars.NUGET_SOURCE }}
+  clean:
+    if: always()
+    
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Remove artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
