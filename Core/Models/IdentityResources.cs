@@ -24,7 +24,8 @@ namespace IdNet8.Models
             public OpenId()
             {
                 Name = IdentityServerConstants.StandardScopes.OpenId;
-                DisplayName = "Your user identifier";
+                DisplayName = "User identifier";
+                Description = "Your user identifier";
                 Required = true;
                 UserClaims.Add(JwtClaimTypes.Subject);
             }
@@ -61,7 +62,8 @@ namespace IdNet8.Models
             public Email()
             {
                 Name = IdentityServerConstants.StandardScopes.Email;
-                DisplayName = "Your email address";
+                DisplayName = "Email address";
+                Description = "Your email addres";
                 Emphasize = true;
                 UserClaims = (Constants.ScopeToClaimsMapping[IdentityServerConstants.StandardScopes.Email].ToList());
             }
@@ -79,7 +81,8 @@ namespace IdNet8.Models
             public Phone()
             {
                 Name = IdentityServerConstants.StandardScopes.Phone;
-                DisplayName = "Your phone number";
+                DisplayName = "Phone number";
+                Description = "Your phone number";
                 Emphasize = true;
                 UserClaims = Constants.ScopeToClaimsMapping[IdentityServerConstants.StandardScopes.Phone].ToList();
             }
@@ -97,7 +100,8 @@ namespace IdNet8.Models
             public Address()
             {
                 Name = IdentityServerConstants.StandardScopes.Address;
-                DisplayName = "Your postal address";
+                DisplayName = "Postal address";
+                Description = "Your postal address";
                 Emphasize = true;
                 UserClaims = Constants.ScopeToClaimsMapping[IdentityServerConstants.StandardScopes.Address].ToList();
             }
