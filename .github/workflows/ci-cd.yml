@@ -51,7 +51,7 @@ jobs:
           mv ./EntityFramework/bin/Release/*.nupkg ./nuget/
           mv ./EntityFramework.Storage/bin/Release/*.nupkg ./nuget/
           mv ./Storage/bin/Release/*.nupkg ./nuget/
-          zip nuget.zip ./nuget
+          zip -r nuget.zip ./nuget
       - name: Upload nuget packages as artifact
         uses: actions/upload-artifact@v3
         with:
@@ -87,8 +87,6 @@ jobs:
       - name: Publish NuGet packages
         run: |
           cd nuget
-          ls
-          echo $(ls)
           dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source ${{ vars.NUGET_SOURCE }}
   clean:
     if: success() || failure()
