@@ -26,8 +26,8 @@ jobs:
           curl -LO ${{ env.DOTNET_DOWNLOAD_URL }}
           tar zxf ${{ env.DOTNET_FILE }}
           rm -R ${{ env.DOTNET_FILE }}
-          cd sdk
-          sudo mv ${{ env.DOTNET_SDK_VERSION }} /usr/share/dotnet/sdk/
+          cd ../
+          sudo mv -f ./dotnet /usr/share/
       - name: Replace placeholder version
         run: |
           sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Core/Core.csproj
